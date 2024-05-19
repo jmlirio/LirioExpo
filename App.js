@@ -1,20 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Landingpage from './screens/Landingpage';
+import Signinscreen from './screens/Signinscreen';
+import Signupscreen from './screens/Signupscreen';
+import Homescreen from './screens/Homescreen';
+import Postcreatescreen from './screens/Postcreatescreen';
+import Postdetailscreen from './screens/Postdetailscreen';
+import Postlistscreen from './screens/Postlistscreen';
+import { PostProvider } from './Postcontext';
 
-export default function App() {
+const Stack = createStackNavigator();
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <PostProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Landingpage">
+          <Stack.Screen name="Landingpage" component={Landingpage} options={{headerShown: false}} />
+          <Stack.Screen name="Signinscreen" component={Signinscreen} options={{headerShown: false}}/>
+          <Stack.Screen name="Signupscreen" component={Signupscreen} options={{headerShown: false}}/>
+          <Stack.Screen name="Homescreen" component={Homescreen} options={{headerShown: false}}/>
+          <Stack.Screen name="Postcreatescreen" component={Postcreatescreen} options={{headerShown: false}}/>
+          <Stack.Screen name="Postdetailscreen" component={Postdetailscreen} options={{headerShown: false}}/>
+          <Stack.Screen name="Postlistscreen" component={Postlistscreen} options={{headerShown: false}}/>
+
+        </Stack.Navigator>
+      </NavigationContainer>
+    </PostProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
